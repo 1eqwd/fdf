@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 21:58:50 by sumedai           #+#    #+#             */
-/*   Updated: 2025/02/16 21:01:38 by sumedai          ###   ########.fr       */
+/*   Created: 2025/02/16 21:48:10 by sumedai           #+#    #+#             */
+/*   Updated: 2025/02/16 22:24:13 by sumedai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-int	ft_isascii(int c)
+
+void ft_free_map(t_data *data)
 {
-	if (127 >= c && c >= 0)
-		return (1);
-	else
-		return (0);
+    color_part(data);
+    map_part;
 }

@@ -6,7 +6,7 @@
 /*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:44:47 by sumedai           #+#    #+#             */
-/*   Updated: 2025/02/13 17:19:04 by sumedai          ###   ########.fr       */
+/*   Updated: 2025/02/15 22:31:57 by sumedai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	calc_isometric(double *x, double *y, int z, t_data *data)
 	original_y = *y;
 	*x = round((original_x - original_y) * cos(data->view.angle_x));
 	*y = round((original_x + original_y) * sin(data->view.angle_y) - z);
-	//  printf("ix %f iy %f\n",*x,*y);
 }
-
 
 void	update_min_max(double iso_x, double iso_y, t_data *data)
 {
@@ -82,14 +80,13 @@ double	calc_scale(t_data *data)
 	return (scale);
 }
 
-void set_scale(t_data *data)
+void	set_scale(t_data *data)
 {
-    double scale;
+	double	scale;
 
-    find_min_max_iso(data);
-    scale = calc_scale(data);
-    // printf("scale %f \n",scale);
-    if (scale < 1)
-        scale = 1;
-    data->view.scale = scale;
+	find_min_max_iso(data);
+	scale = calc_scale(data);
+	if (scale < 1)
+		scale = 1;
+	data->view.scale = scale;
 }

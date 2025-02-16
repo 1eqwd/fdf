@@ -6,21 +6,21 @@
 /*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:41:46 by sumedai           #+#    #+#             */
-/*   Updated: 2024/09/22 13:31:46 by sumedai          ###   ########.fr       */
+/*   Updated: 2025/02/16 20:50:02 by sumedai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-    size_t len;
+	size_t	len;
 
-    len = 0;
-    while (lst)
-    {
-        lst = lst->next;
-        len++;
-    }
-    return (len);
+	len = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
 }

@@ -10,16 +10,19 @@ OBJ = $(SRC:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC = cc
 
-LINKS = -L/usr/local/lib -lft -L./libft -lmlx -framework OpenGL -framework Appkit
-CFLAGS = -I/usr/local/include -I./libft
+LINKS = -lmlx -L./minilibx-linux -lft -L./libft -lXext -lX11 -lm -lz
+# LINKS += -l./mlx_linux
+CFLAGS = -I./minilibx-linux/ -I./libft
 CFLAGS += -Wall -Wextra -Werror
-CFLAGS += -fsanitize=address -g
+# CFLAGS += -fsanitize=address -g
 LIBFT_PATH = libft/
+MLX_PATH = minilibx-linux/
 RM = rm -rf
 
 $(NAME) : $(OBJ)
 	$(MAKE) -C $(LIBFT_PATH)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LINKS)
+	$(MAKE) -C $(MLX_PATH)
+	$(CC) $(OBJ) $(CFLAGS) $(LINKS) -o $(NAME)
 
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
@@ -34,7 +37,9 @@ clean :
 
 fclean : clean
 	$(RM) $(NAME)
+	@cd $(MLX_PATH) && $(MAKE) clean
 	@cd $(LIBFT_PATH) && $(MAKE) fclean
+
 
 re : fclean all
 

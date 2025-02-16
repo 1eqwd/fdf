@@ -6,12 +6,11 @@
 /*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:12:17 by sumedai           #+#    #+#             */
-/*   Updated: 2025/02/13 21:18:31 by sumedai          ###   ########.fr       */
+/*   Updated: 2025/02/15 22:10:09 by sumedai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
 
 int	handle_invalid_file(char *filename)
 {
@@ -39,10 +38,10 @@ void	put_invalid_file(const char *msg)
 	exit(1);
 }
 
-void perror_and_exit(const char *msg)
+void	perror_and_exit(const char *msg)
 {
-    perror(msg);
-    exit(1);
+	perror(msg);
+	exit(1);
 }
 
 void	handle_read_error(t_data *data, int row, const char *error_message)

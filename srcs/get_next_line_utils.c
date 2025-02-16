@@ -1,5 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 22:37:37 by sumedai           #+#    #+#             */
+/*   Updated: 2025/02/15 22:43:03 by sumedai          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	reset_gnl(char *filename)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		perror_and_exit(ERR_FILE);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
 
 int	get_width_from_line(char *line)
 {
@@ -44,59 +72,20 @@ char	*gnl_remove_trailing_chars(int fd)
 	return (line);
 }
 
-size_t	ft_strlen(const char *s)
+void	free_str(char **str, int x_len)
 {
-	size_t	count;
-
-	count = 0;
-	while (s[count])
-		count++;
-	return (count);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	index;
-
-	index = 0;
-	while (s[index])
+	x_len -= 1;
+	while (x_len >= 0)
 	{
-		if (s[index] == (char)c)
-			return ((char *)&s[index]);
-		index++;
+		free(str[x_len]);
+		x_len--;
 	}
-	if ((char)c == '\0')
-		return ((char *)&s[index]);
-	return (NULL);
+	free(str);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	free_2d_memory(int **array, int height)
 {
-	size_t	index;
-
-	if (dst == src)
-		return (dst);
-	index = 0;
-	while (index < n)
-	{
-		((char *)dst)[index] = ((char *)src)[index];
-		index++;
-	}
-	return (dst);
-}
-
-void free_str(char **str)
-{
-	while (*str)
-	{
-		free(*str);
-		str++;
-	}
-}
-
-void free_2d_memory(int **array, int height)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < height)

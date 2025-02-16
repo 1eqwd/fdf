@@ -6,12 +6,11 @@
 /*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:56:42 by sumedai           #+#    #+#             */
-/*   Updated: 2025/02/13 21:27:29 by sumedai          ###   ########.fr       */
+/*   Updated: 2025/02/16 23:08:42 by sumedai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
 
 void	check_ac(int ac)
 {
@@ -31,27 +30,36 @@ void	initialize(t_data *data)
 	data->view.scale = 1;
 }
 
-int press(int keycode, t_data *var)
+int	press(int keycode, t_data *data)
 {
-	if (!var)
-		return (0);
 	if (keycode == ESC_KEY)
 	{
-		mlx_clear_window(var->mlx.mlx, var->mlx.win);
+		if (data->mlx.img)
+			mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+		if (data->mlx.win)
+			mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+		if (data->mlx.mlx)
+			mlx_destroy_display(data->mlx.mlx);
+		free(data->mlx.mlx);
+		map_free(data);
 		exit(0);
 	}
 	return (0);
 }
 
-int x_botton(t_data *var)
+int	x_botton(t_data *data)
 {
-	if (!var)
-		return (0);
-	mlx_destroy_window(var->mlx.mlx, var->mlx.win);
+	if (data->mlx.img)
+		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+	if (data->mlx.win)
+		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+	if (data->mlx.mlx)
+		mlx_destroy_display(data->mlx.mlx);
+	free(data->mlx.mlx);
+	map_free(data);
 	exit(0);
-	return(0);
+	return (0);
 }
-
 
 int	main(int ac, char **av)
 {
@@ -61,16 +69,9 @@ int	main(int ac, char **av)
 	check_file(av[1]);
 	initialize(&data);
 	init_mlx(&data);
-	// printf("%p %p\n",data.mlx.mlx, data.mlx.win);
 	set_map(av[1], &data);
-	// for (int i = 0; i < data.map.height; i++)
-	// {
-	// 	for (int j = 0; j < data.map.width; j++)
-	// 		printf("(%d, %d, %d, 0x%x)\n",i, j, data.map.height_map[i][j], data.map.color_map[i][j]);
-	// }
 	set_scale(&data);
 	set_offset(&data);
-	// printf("scale:%f offset_x:%f offset_y:%f\n",data.view.scale , data.view.offset_x, data.view.offset_y);
 	draw_map(&data);
 	mlx_key_hook(data.mlx.win, press, &data);
 	mlx_hook(data.mlx.win, DESTROY_NOTIFY, 1L << 17, x_botton, &data);

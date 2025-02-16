@@ -1,25 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sumedai <sumedai@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 21:37:09 by sumedai           #+#    #+#             */
+/*   Updated: 2025/02/16 17:00:10 by sumedai          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef GET_NETXT_LINE
-#define GET_NETXT_LINE
+#ifndef  GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-// # define FD_MAX 256 
-// # define BUF_MAX INT_MAX
-# define BUFFER_SIZE 4
-
-# include <unistd.h>
+# define BUFFER_SIZE 100
+# include "../libft/libft.h"
 # include <fcntl.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 char	*gnl_remove_trailing_chars(int fd);
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 char	*ft_read(int fd, char *str);
 char	*ft_save(char *str);
 char	*ft_nextl(char *str);
 char	*ft_memadd(char *s1, const char *s2, size_t size);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
-void free_str(char **str);
-void free_2d_memory(int **array, int row);
+void	free_str(char **str, int x_len);
+void	free_2d_memory(int **array, int height);
+
 #endif
